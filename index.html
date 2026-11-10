@@ -168,7 +168,7 @@ footer{position:relative;z-index:1;text-align:center;padding:0 15px 25px;color:#
  <div class="card">  
   <div class="ribbon emoji">💌</div>  
   <h1>یه چیز کوچولو مونده!</h1>  
-  <p>اسمت و پیامت رو بفرست تا شماره کارتم رو بفرستم 💗</p>  
+  <p>فرم رو پر کن تا شماره کارتم رو بفرستم 💗</p>  
   <form id="guestForm">  
    <label class="form-label" for="guestName">اسمت چیه؟ 🎀</label>  
    <input class="field" id="guestName" maxlength="40" required placeholder="اسم کوچولوت رو بنویس...">  
@@ -262,9 +262,9 @@ function noThanks(){
 const foodReactions={  
   noodles:"سلیقه‌هامون یکیهههه! 🥹💗",  
   pizza:"مشتی حال داری پاشو خودن درست کن😂🍕",  
-  burger:"جدی جدی برگر؟! 😭🍔",  
-  sushi:"بابات کره‌ای بوده یا عمت؟ 😂🍣",  
-  ghormeh:"قرار بود خوش بگذرونیم، نه غذای خونه بخوریم! 😭🥘",  
+  burger:"جدی جدی برگر؟! 😔🍔",  
+  sushi:"بابات کره‌ای بوده یا عمت؟ 😐🍣",  
+  ghormeh:"خشمزس ولی سنگینه مشتی💔🤧",  
   istanbuli:"این غذا رو روش غیرت دارم، حاضر نیستم باهات نصف کنم! 😤🍅"  
 };  
   
@@ -283,8 +283,8 @@ function confirmFood(){
 }  
   
 const movieReactions={  
-  harry:"دوسش دارم ولی آخه الان؟! 🪄😂",  
-  love:"سیهدیررررر این چیه؟! 😭",  
+  harry:"دوسش دارم ولی آخه الان؟🤦🏻‍♀️💔",  
+  love:"خدایی با این سلیقت💩",  
   alchemy:"برای هزار بارم که شده میبینمممم! 🥹✨",  
   sponge:"باید غذا برگر انتخاب می‌کردی الاغ 😂🍔"  
 };  
@@ -303,10 +303,10 @@ function confirmMovie(){
 }  
   
 const packingReactions={  
-  pajamas:"ترجیح میدم با شورت بیام تا بیژامه بابام 😭",  
+  pajamas:"ترجیح میدم با شورت بیام تا با بیژامه بابام 😭",  
   drink:"صب کن مامانتو ببینم اشغال😡🫵",  
   phone:"پفیوز قرار بدون گوشیه🤦🏻‍♀️",  
-  misc:"امشب بریز و بپاشههههه بیار بزنیم به بدننن 🎉"  
+  misc:"حاجی دهنتو من رژیمم نکن با من🫠🥗"  
 };  
 function togglePacking(button,label,key){  
   const alreadySelected=selectedPacking.some(item=>item.key===key);  
