@@ -1,841 +1,540 @@
-
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Little Date 🎀</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --pink:#f3a1c3;
-  --deep:#c56893;
-  --soft:#fff0f6;
-  --purple:#e9dfff;
-  --text:#80516b;
-  --white:#fffafd;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:'Vazirmatn',sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 5% 10%,#ffdce9,transparent 28%),
-    radial-gradient(circle at 95% 75%,#e6dcff,transparent 30%),
-    radial-gradient(circle at 50% 100%,#ffe6f0,transparent 35%),
-    linear-gradient(135deg,#fff7fa,#fff0f6,#f7f1ff);
-  overflow-x:hidden;
-}
-button,input,textarea{font-family:inherit}
-button{cursor:pointer}
-.emoji{
-  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
-}
-.decor{
-  position:fixed;
-  z-index:0;
-  pointer-events:none;
-  opacity:.65;
-  font-size:27px;
-  animation:float 5s ease-in-out infinite;
-}
-.d1{top:8%;left:5%}
-.d2{top:25%;right:4%;animation-delay:1s}
-.d3{bottom:15%;left:7%;animation-delay:2s}
-.d4{top:65%;right:8%;animation-delay:1.5s}
-.d5{top:12%;right:48%;animation-delay:2.5s}
-.d6{bottom:8%;right:45%;animation-delay:1s}
-.d7{top:45%;left:3%;animation-delay:2s}
-
-@keyframes float{
-  0%,100%{transform:translateY(0) rotate(-8deg)}
-  50%{transform:translateY(-17px) rotate(9deg)}
-}
-@keyframes appear{
-  from{opacity:0;transform:translateY(18px) scale(.98)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-@keyframes sparkle{
-  0%,100%{transform:scale(1) rotate(-5deg)}
-  50%{transform:scale(1.12) rotate(5deg)}
-}
-header{
-  position:relative;
-  z-index:1;
-  text-align:center;
-  padding:27px 15px 8px;
-}
-.brand{
-  color:#c96f99;
-  font-size:25px;
-  font-weight:800;
-  text-shadow:0 3px 15px #f4b5d0;
-}
-main{
-  position:relative;
-  z-index:1;
-  width:min(760px,93%);
-  margin:22px auto 65px;
-}
-.page{display:none}
-.page.active{display:block;animation:appear .45s ease}
-.card{
-  position:relative;
-  padding:36px 27px;
-  border:1px solid #ffffff;
-  border-radius:32px;
-  background:linear-gradient(145deg,#ffffffed,#fff9fcdf);
-  box-shadow:0 20px 55px #d98eae30,0 3px 12px #e6b8cc20;
-  backdrop-filter:blur(14px);
-  text-align:center;
-  overflow:hidden;
-}
-.card::before{
-  content:"✧  ♡  ✧";
-  position:absolute;
-  top:13px;
-  right:19px;
-  color:#e9a5c1;
-  font-size:16px;
-}
-.card::after{
-  content:"♡  ✧";
-  position:absolute;
-  bottom:12px;
-  left:20px;
-  color:#e9a5c1;
-  font-size:18px;
-}
-.ribbon{
-  font-size:47px;
-  margin-bottom:8px;
-  animation:sparkle 3s infinite ease-in-out;
-}
-h1{
-  font-size:clamp(25px,5vw,36px);
-  margin:8px 0 12px;
-  color:#bd648e;
-}
-h2{
-  font-size:25px;
-  margin:5px 0 12px;
-  color:#bd648e;
-}
-p{line-height:2}
-.subtitle{color:#a47b91;font-size:14px}
-.btn{
-  border:0;
-  border-radius:18px;
-  padding:13px 23px;
-  font-size:15px;
-  font-weight:700;
-  transition:.22s;
-  box-shadow:0 7px 18px #d88bab25;
-}
-.btn:hover{transform:translateY(-3px);filter:brightness(1.03)}
-.btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.primary{
-  background:linear-gradient(135deg,#f3a8c7,#df80ad);
-  color:white;
-}
-.secondary{background:#f7e8f0;color:#a75e82}
-.lavender{background:linear-gradient(135deg,#e9e0ff,#d8c8ff);color:#8065a7}
-.button-row{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:25px;
-}
-.progress{
-  height:8px;
-  border-radius:30px;
-  background:#f8dce9;
-  margin:0 auto 25px;
-  max-width:320px;
-  overflow:hidden;
-}
-.progress span{
-  display:block;
-  height:100%;
-  background:linear-gradient(90deg,#e99bbc,#cdb9f4);
-  border-radius:30px;
-}
-.choices{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:15px;
-  margin-top:25px;
-}
-.choice{
-  position:relative;
-  border:2px solid #f7dce8;
-  border-radius:23px;
-  background:linear-gradient(145deg,#fffafd,#fff3f8);
-  padding:20px 10px;
-  color:#80536b;
-  font-weight:700;
-  min-height:125px;
-  transition:.25s;
-  box-shadow:0 6px 15px #dba0bb15;
-}
-.choice:hover{
-  border-color:#e99cba;
-  transform:translateY(-4px);
-  box-shadow:0 12px 25px #eaa6c533;
-}
-.choice.selected{
-  border-color:#df80ad;
-  background:linear-gradient(145deg,#ffe6f0,#f4eaff);
-  box-shadow:0 0 0 4px #f8d5e5,0 10px 25px #eaa6c544;
-  transform:translateY(-3px);
-}
-.choice .emoji{
-  display:block;
-  font-size:39px;
-  margin-bottom:9px;
-}
-.choice .tiny{
-  display:block;
-  font-size:11px;
-  font-weight:500;
-  color:#b1849c;
-  margin-top:5px;
-}
-.feedback{
-  margin-top:21px;
-  padding:17px;
-  background:linear-gradient(135deg,#fff0f6,#f2eaff);
-  border:1px dashed #e9a6c3;
-  border-radius:20px;
-  font-weight:700;
-  color:#a45f82;
-  display:none;
-  line-height:2;
-}
-.feedback.show{display:block;animation:appear .3s}
-.confirm-note{
-  margin-top:16px;
-  font-size:12px;
-  color:#a47b91;
-}
-.cart-line{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  background:#fff7fb;
-  border:1px solid #f8dce9;
-  border-radius:17px;
-  padding:14px 16px;
-  margin:11px 0;
-  text-align:right;
-}
-.cart-total{
-  background:linear-gradient(135deg,#fff0f6,#f1eaff);
-  padding:20px;
-  border-radius:22px;
-  margin-top:18px;
-}
-.cart-total strong{font-size:25px;color:#c65f90}
-.field{
-  display:block;
-  width:100%;
-  border:1.5px solid #f0c5d8;
-  border-radius:16px;
-  background:#fffafd;
-  padding:14px 16px;
-  margin:12px 0;
-  outline:none;
-  color:#75465d;
-  font-size:14px;
-}
-.field:focus{
-  border-color:#dc8eb1;
-  box-shadow:0 0 0 3px #f7dce9;
-}
-textarea.field{resize:vertical;min-height:125px}
-.form-label{
-  display:block;
-  text-align:right;
-  font-size:14px;
-  font-weight:700;
-  margin-top:17px;
-}
-.notice{
-  background:#fff5fa;
-  border-radius:16px;
-  padding:13px;
-  font-size:12px;
-  color:#986a81;
-  line-height:1.9;
-  text-align:right;
-}
-.small-note{font-size:12px;color:#a47b90}
-.admin-shell{text-align:right}
-.admin-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.message-card{
-  background:#fff8fc;
-  border:1px solid #f3d5e3;
-  border-radius:18px;
-  padding:16px;
-  margin:13px 0;
-}
-.message-card p{white-space:pre-wrap;overflow-wrap:anywhere}
-.message-meta{font-size:11px;color:#aa8195}
-.delete-btn{
-  border:0;
-  background:#ffe2ec;
-  color:#a54f76;
-  border-radius:12px;
-  padding:8px 12px;
-}
-footer{
-  position:relative;
-  z-index:1;
-  text-align:center;
-  padding:0 15px 25px;
-  color:#b17f98;
-  font-size:12px;
-}
-@media(max-width:480px){
-  .card{padding:30px 17px}
-  .choices{gap:10px}
-  .choice{padding:15px 7px;font-size:13px;min-height:115px}
-  .choice .emoji{font-size:33px}
-  .btn{padding:12px 18px}
-}
-</style>
-</head>
-
-<body>
-<div class="decor d1 emoji">🎀</div>
-<div class="decor d2 emoji">💗</div>
-<div class="decor d3 emoji">🌷</div>
-<div class="decor d4 emoji">✨</div>
-<div class="decor d5 emoji">🦢</div>
-<div class="decor d6 emoji">🧸</div>
-<div class="decor d7 emoji">💌</div>
-
-<header>
-  <div class="brand">Our Little Date <span class="emoji">🎀</span></div>
-</header>
-
-<main>
-
-<!-- دعوت -->
-<section class="page active" id="invite">
- <div class="card">
-  <div class="ribbon emoji">💌</div>
-  <h1>یه قرار متفاوت داریم!</h1>
-  <p>از اونجایی که حضوری وقت ندارم باهات بیرون بیام، بیا مجازی بریم خوش بگذرونیم! 🥹💗</p>
-  <h2>حاضری با من همراه شی؟ 🌷</h2>
-  <div class="button-row">
-   <button class="btn primary" onclick="showPage('welcome')">آرههههه! 💗</button>
-   <button class="btn secondary" id="noBtn" onclick="noThanks()">نه! 🙄</button>
-  </div>
-  <div class="feedback" id="noFeedback"></div>
- </div>
-</section>
-
-<!-- خوش آمد -->
-<section class="page" id="welcome">
- <div class="card">
-  <div class="ribbon emoji">🥹💕</div>
-  <h1>میدونستمممم!</h1>
-  <p>پس آماده باش که قراره یه شب بامزه داشته باشیم!</p>
-  <button class="btn primary" onclick="showPage('food')">بریم انتخاب غذا 🍜</button>
- </div>
-</section>
-
-<!-- غذا -->
-<section class="page" id="food">
- <div class="card">
-  <div class="progress"><span style="width:25%"></span></div>
-  <div class="ribbon emoji">🍽️</div>
-  <h2>اول غذا رو انتخاب کنیم!</h2>
-  <p class="subtitle">ببینم سلیقه‌مون یکیه یا نه؟ 👀</p>
-
-  <div class="choices">
-   <button class="choice" onclick="chooseFood(this,'نودل 🍜','noodles')"><span class="emoji">🍜</span>نودل</button>
-   <button class="choice" onclick="chooseFood(this,'پیتزا 🍕','pizza')"><span class="emoji">🍕</span>پیتزا</button>
-   <button class="choice" onclick="chooseFood(this,'برگر 🍔','burger')"><span class="emoji">🍔</span>برگر</button>
-   <button class="choice" onclick="chooseFood(this,'سوشی 🍣','sushi')"><span class="emoji">🍣</span>سوشی</button>
-   <button class="choice" onclick="chooseFood(this,'قورمه‌سبزی 🥘','ghormeh')"><span class="emoji">🥘</span>قورمه‌سبزی</button>
-   <button class="choice" onclick="chooseFood(this,'استانبولی 🍅','istanbuli')"><span class="emoji">🍅</span>استانبولی</button>
-  </div>
-
-  <div class="feedback" id="foodFeedback"></div>
-  <div class="button-row">
-   <button class="btn primary" id="foodConfirm" disabled onclick="confirmFood()">تأیید غذا و ادامه 💗</button>
-  </div>
-  <div class="confirm-note">تا انتخابت رو تأیید نکنی، وارد مرحله‌ی بعد نمی‌شی!</div>
- </div>
-</section>
-
-<!-- فیلم -->
-<section class="page" id="movie">
- <div class="card">
-  <div class="progress"><span style="width:50%"></span></div>
-  <div class="ribbon emoji">🎬</div>
-  <h2>حالا فیلم چی ببینیم؟</h2>
-  <p class="subtitle">انتخابت رو با دقت انجام بده! 🍿</p>
-
-  <div class="choices">
-   <button class="choice" onclick="chooseMovie(this,'هری پاتر 🪄','harry')"><span class="emoji">🪄</span>هری پاتر<span class="tiny">دنیای جادو</span></button>
-   <button class="choice" onclick="chooseMovie(this,'عشق ابدی 💘','love')"><span class="emoji">💘</span>عشق ابدی<span class="tiny">انتخاب احساسی؟</span></button>
-   <button class="choice" onclick="chooseMovie(this,'کیمیاگر روح ✨','alchemy')"><span class="emoji">✨</span>کیمیاگر روح<span class="tiny">انتخاب همیشگی</span></button>
-   <button class="choice" onclick="chooseMovie(this,'باب اسفنجی 🍍','sponge')"><span class="emoji">🍍</span>باب اسفنجی<span class="tiny">خنده و خنده</span></button>
-  </div>
-
-  <div class="feedback" id="movieFeedback"></div>
-  <div class="button-row">
-   <button class="btn primary" id="movieConfirm" disabled onclick="confirmMovie()">تأیید فیلم و ادامه 🎬</button>
-   <button class="btn secondary" onclick="showPage('food')">برگشت</button>
-  </div>
-  <div class="confirm-note">اول فیلم رو انتخاب کن، واکنشم رو ببین، بعد تأیید کن! 🎀</div>
- </div>
-</section>
-
-<!-- وسایل -->
-<section class="page" id="packing">
- <div class="card">
-  <div class="progress"><span style="width:75%"></span></div>
-  <div class="ribbon emoji">🧳</div>
-  <h2>چی با خودمون بیاریم؟</h2>
-  <p class="subtitle">فقط یکی رو انتخاب کن! 🎀</p>
-
-  <div class="choices">
-   <button class="choice" onclick="togglePacking(this,'پیژامه بابا 👖','pajamas')"><span class="emoji">👖</span>پیژامه بابا</button>
-   <button class="choice" onclick="togglePacking(this,'مشروب و الکلی جات🍷','drink')"><span class="emoji">🍷</span>'مشروب و الکلی جات</button>
-   <button class="choice" onclick="togglePacking(this,'گوشی 📱','phone')"><span class="emoji">📱</span>گوشی</button>
-   <button class="choice" onclick="togglePacking(this,'خرت و پرت 🍨','misc')"><span class="emoji"></span>🍨</span>خرت و پرت </button>
-  </div>
-
-  <div class="feedback" id="packingFeedback"></div>
-
-  <div class="button-row">
-   <button class="btn primary" onclick="confirmPacking()">تأیید وسایل و ادامه 🎀</button>
-   <button class="btn secondary" onclick="showPage('movie')">برگشت</button>
-  </div>
-  <div class="confirm-note">فقط یک وسیله می‌تونی همراهت بیاری؛ انتخابت رو مشخص کن! 🎀</div>
- </div>
-</section>
-
-<!-- پایان -->
-<section class="page" id="final">
- <div class="card">
-  <div class="ribbon emoji">🩷🎀🩷</div>
-  <h1>قرارمون تکمیله!</h1>
-  <p>غذا انتخاب شد، فیلم انتخاب شد، وسایلمونم جمع شد!</p>
-  <p>حالا فقط مونده خوش بگذرونیمممم! 🌷</p>
-  <div class="button-row">
-   <button class="btn primary" onclick="renderCart();showPage('cart')">دیدن سبد خرید 🛒</button>
-  </div>
- </div>
-</section>
-
-<!-- سبد -->
-<section class="page" id="cart">
- <div class="card">
-  <div class="ribbon emoji">🛍️</div>
-  <h1>سبد خرید قرارمون!</h1>
-  <p class="subtitle">همه‌چی آماده‌ست؛ فقط یه مرحله مونده! 💗</p>
-  <div id="cartItems"></div>
-  <div class="cart-total">
-   <p>مبلغ نهایی قرار مجازی:</p>
-   <strong>۵۶۰ میلیون تومان 😂</strong>
-
-  </div>
-  <div class="button-row">
-   <button class="btn primary" onclick="showPage('guest')">پرداخت ۵۶۰ میلیون 😂</button>
-   <button class="btn secondary" onclick="showPage('final')">برگشت</button>
-  </div>
- </div>
-</section>
-
-<!-- پیام -->
-<section class="page" id="guest">
- <div class="card">
-  <div class="ribbon emoji">💌</div>
-  <h1>یه چیز کوچولو مونده!</h1>
-  <p>اسمت و پیامت رو بفرست تا مستقیم به ربات تلگرام یلدا برسه! 💗</p>
-
-  <form id="guestForm">
-   <label class="form-label" for="guestName">اسمت چیه؟ 🎀</label>
-   <input class="field" id="guestName" maxlength="40" required placeholder="اسم کوچولوت رو بنویس...">
-
-   <label class="form-label" for="guestMessage">پیغامی برای یلدا یا نظرت راجع به این دیت؟ 💗</label>
-   <textarea class="field" id="guestMessage" maxlength="500" placeholder="هرچی دوست داری برام بنویس..."></textarea>
-
+<!DOCTYPE html>  <html lang="fa" dir="rtl">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Our Little Date 🎀</title>  
+<link rel="preconnect" href="https://fonts.googleapis.com">  
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <style>  
+:root{--pink:#f3a1c3;--deep:#c56893;--soft:#fff0f6;--purple:#e9dfff;--text:#80516b;--white:#fffafd}  
+*{box-sizing:border-box}  
+body{margin:0;min-height:100vh;font-family:'Vazirmatn',sans-serif;color:var(--text);background:radial-gradient(circle at 5% 10%,#ffdce9,transparent 28%),radial-gradient(circle at 95% 75%,#e6dcff,transparent 30%),radial-gradient(circle at 50% 100%,#ffe6f0,transparent 35%),linear-gradient(135deg,#fff7fa,#fff0f6,#f7f1ff);overflow-x:hidden}  
+button,input,textarea{font-family:inherit}  
+button{cursor:pointer}  
+.emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}  
+.decor{position:fixed;z-index:0;pointer-events:none;opacity:.65;font-size:27px;animation:float 5s ease-in-out infinite}  
+.d1{top:8%;left:5%}.d2{top:25%;right:4%;animation-delay:1s}.d3{bottom:15%;left:7%;animation-delay:2s}.d4{top:65%;right:8%;animation-delay:1.5s}.d5{top:12%;right:48%;animation-delay:2.5s}.d6{bottom:8%;right:45%;animation-delay:1s}.d7{top:45%;left:3%;animation-delay:2s}  
+@keyframes float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-17px) rotate(9deg)}}  
+@keyframes appear{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}  
+@keyframes sparkle{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.12) rotate(5deg)}}  
+header{position:relative;z-index:1;text-align:center;padding:27px 15px 8px}  
+.brand{color:#c96f99;font-size:25px;font-weight:800;text-shadow:0 3px 15px #f4b5d0}  
+main{position:relative;z-index:1;width:min(760px,93%);margin:22px auto 65px}  
+.page{display:none}.page.active{display:block;animation:appear .45s ease}  
+.card{position:relative;padding:36px 27px;border:1px solid #fff;border-radius:32px;background:linear-gradient(145deg,#ffffffed,#fff9fcdf);box-shadow:0 20px 55px #d98eae30,0 3px 12px #e6b8cc20;backdrop-filter:blur(14px);text-align:center;overflow:hidden}  
+.card::before{content:"✧  ♡  ✧";position:absolute;top:13px;right:19px;color:#e9a5c1;font-size:16px}  
+.card::after{content:"♡  ✧";position:absolute;bottom:12px;left:20px;color:#e9a5c1;font-size:18px}  
+.ribbon{font-size:47px;margin-bottom:8px;animation:sparkle 3s infinite ease-in-out}  
+h1{font-size:clamp(25px,5vw,36px);margin:8px 0 12px;color:#bd648e}  
+h2{font-size:25px;margin:5px 0 12px;color:#bd648e}  
+p{line-height:2}.subtitle{color:#a47b91;font-size:14px}  
+.btn{border:0;border-radius:18px;padding:13px 23px;font-size:15px;font-weight:700;transition:.22s;box-shadow:0 7px 18px #d88bab25}  
+.btn:hover{transform:translateY(-3px);filter:brightness(1.03)}.btn:active{transform:scale(.97)}.btn:disabled{opacity:.5;cursor:not-allowed}  
+.primary{background:linear-gradient(135deg,#f3a8c7,#df80ad);color:white}  
+.secondary{background:#f7e8f0;color:#a75e82}  
+.lavender{background:linear-gradient(135deg,#e9e0ff,#d8c8ff);color:#8065a7}  
+.button-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:25px}  
+.progress{height:8px;border-radius:30px;background:#f8dce9;margin:0 auto 25px;max-width:320px;overflow:hidden}  
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#e99bbc,#cdb9f4);border-radius:30px}  
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:25px}  
+.choice{position:relative;border:2px solid #f7dce8;border-radius:23px;background:linear-gradient(145deg,#fffafd,#fff3f8);padding:20px 10px;color:#80536b;font-weight:700;min-height:125px;transition:.25s;box-shadow:0 6px 15px #dba0bb15}  
+.choice:hover{border-color:#e99cba;transform:translateY(-4px);box-shadow:0 12px 25px #eaa6c533}  
+.choice.selected{border-color:#df80ad;background:linear-gradient(145deg,#ffe6f0,#f4eaff);box-shadow:0 0 0 4px #f8d5e5,0 10px 25px #eaa6c544;transform:translateY(-3px)}  
+.choice .emoji{display:block;font-size:39px;margin-bottom:9px}  
+.choice .tiny{display:block;font-size:11px;font-weight:500;color:#b1849c;margin-top:5px}  
+.feedback{margin-top:21px;padding:17px;background:linear-gradient(135deg,#fff0f6,#f2eaff);border:1px dashed #e9a6c3;border-radius:20px;font-weight:700;color:#a45f82;display:none;line-height:2}  
+.feedback.show{display:block;animation:appear .3s}  
+.confirm-note{margin-top:16px;font-size:12px;color:#a47b91}  
+.cart-line{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff7fb;border:1px solid #f8dce9;border-radius:17px;padding:14px 16px;margin:11px 0;text-align:right}  
+.cart-total{background:linear-gradient(135deg,#fff0f6,#f1eaff);padding:20px;border-radius:22px;margin-top:18px}  
+.cart-total strong{font-size:25px;color:#c65f90}  
+.field{display:block;width:100%;border:1.5px solid #f0c5d8;border-radius:16px;background:#fffafd;padding:14px 16px;margin:12px 0;outline:none;color:#75465d;font-size:14px}  
+.field:focus{border-color:#dc8eb1;box-shadow:0 0 0 3px #f7dce9}  
+textarea.field{resize:vertical;min-height:125px}  
+.form-label{display:block;text-align:right;font-size:14px;font-weight:700;margin-top:17px}  
+.small-note{font-size:12px;color:#a47b90}  
+.admin-shell{text-align:right}  
+.admin-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}  
+.message-card{background:#fff8fc;border:1px solid #f3d5e3;border-radius:18px;padding:16px;margin:13px 0}  
+.message-card p{white-space:pre-wrap;overflow-wrap:anywhere}  
+.message-meta{font-size:11px;color:#aa8195}  
+.delete-btn{border:0;background:#ffe2ec;color:#a54f76;border-radius:12px;padding:8px 12px}  
+footer{position:relative;z-index:1;text-align:center;padding:0 15px 25px;color:#b17f98;font-size:12px}  
+.denied{padding:22px;background:linear-gradient(135deg,#fff0f6,#f1eaff);border:1px dashed #e9a6c3;border-radius:22px;text-align:center;color:#a45f82;line-height:2}  
+@media(max-width:480px){.card{padding:30px 17px}.choices{gap:10px}.choice{padding:15px 7px;font-size:13px;min-height:115px}.choice .emoji{font-size:33px}.btn{padding:12px 18px}}  
+</style>  </head>  <body>  
+<div class="decor d1 emoji">🎀</div><div class="decor d2 emoji">💗</div><div class="decor d3 emoji">🌷</div><div class="decor d4 emoji">✨</div><div class="decor d5 emoji">🦢</div><div class="decor d6 emoji">🧸</div><div class="decor d7 emoji">💌</div>  <header><div class="brand">Our Little Date <span class="emoji">🎀</span></div></header>  
+<main>  <section class="page active" id="invite">  
+ <div class="card">  
+  <div class="ribbon emoji">💌</div>  
+  <h1>یه قرار متفاوت داریم!</h1>  
+  <p>از اونجایی که حضوری همیشه شرمندم که نمیتونم باهات بیرون بیام، بیا مجازی بریم خوش بگذرونیم! 🥹💗</p>  
+  <h2>حاضری با من همراه شی؟ 🌷</h2>  
+  <div class="button-row">  
+   <button class="btn primary" onclick="showPage('welcome')">آرههههه! 💗</button>  
+   <button class="btn secondary" id="noBtn" onclick="noThanks()">نه! 🙄</button>  
+  </div>  
+  <div class="feedback" id="noFeedback"></div>  
+ </div>  
+</section>  <section class="page" id="welcome">  
+ <div class="card">  
+  <div class="ribbon emoji">🥹💕</div>  
+  <h1>میدونستمممم!</h1>  
+  <p> پس اماده باش که قراره بترکونیم!</p>  
+  <button class="btn primary" onclick="showPage('food')">بریم انتخاب غذا 🍜</button>  
+ </div>  
+</section>  <section class="page" id="food">  
+ <div class="card">  
+  <div class="progress"><span style="width:25%"></span></div>  
+  <div class="ribbon emoji">🍽️</div>  
+  <h2>اول غذا رو انتخاب کنیم!</h2>  
+  <p class="subtitle">ببینم سلیقه‌مون یکیه یا نه؟ 👀</p>  
+  <div class="choices">  
+   <button class="choice" onclick="chooseFood(this,'نودل 🍜','noodles')"><span class="emoji">🍜</span>نودل</button>  
+   <button class="choice" onclick="chooseFood(this,'پیتزا 🍕','pizza')"><span class="emoji">🍕</span>پیتزا</button>  
+   <button class="choice" onclick="chooseFood(this,'برگر 🍔','burger')"><span class="emoji">🍔</span>برگر</button>  
+   <button class="choice" onclick="chooseFood(this,'سوشی 🍣','sushi')"><span class="emoji">🍣</span>سوشی</button>  
+   <button class="choice" onclick="chooseFood(this,'قورمه‌سبزی 🥘','ghormeh')"><span class="emoji">🥘</span>قورمه‌سبزی</button>  
+   <button class="choice" onclick="chooseFood(this,'استانبولی 🍅','istanbuli')"><span class="emoji">🍅</span>استانبولی</button>  
+  </div>  
+  <div class="feedback" id="foodFeedback"></div>  
+  <div class="button-row">  
+   <button class="btn primary" id="foodConfirm" disabled onclick="confirmFood()">تأیید غذا و ادامه 💗</button>  
+  </div>  
+  <div class="confirm-note">تا انتخابت رو تأیید نکنی، وارد مرحله‌ی بعد نمی‌شی!</div>  
+ </div>  
+</section>  <section class="page" id="movie">  
+ <div class="card">  
+  <div class="progress"><span style="width:50%"></span></div>  
+  <div class="ribbon emoji">🎬</div>  
+  <h2>حالا فیلم چی ببینیم؟</h2>  
+  <p class="subtitle">انتخابت رو با دقت انجام بده! 🍿</p>  
+  <div class="choices">  
+   <button class="choice" onclick="chooseMovie(this,'هری پاتر 🪄','harry')"><span class="emoji">🪄</span>هری پاتر<span class="tiny">دنیای جادو</span></button>  
+   <button class="choice" onclick="chooseMovie(this,'عشق ابدی 💘','love')"><span class="emoji">💘</span>عشق ابدی<span class="tiny">انتخاب احساسی؟</span></button>  
+   <button class="choice" onclick="chooseMovie(this,'کیمیاگر روح ✨','alchemy')"><span class="emoji">✨</span>کیمیاگر روح<span class="tiny">انتخاب همیشگی</span></button>  
+   <button class="choice" onclick="chooseMovie(this,'باب اسفنجی 🍍','sponge')"><span class="emoji">🍍</span>باب اسفنجی<span class="tiny">خنده و خنده</span></button>  
+  </div>  
+  <div class="feedback" id="movieFeedback"></div>  
+  <div class="button-row">  
+   <button class="btn primary" id="movieConfirm" disabled onclick="confirmMovie()">تأیید فیلم و ادامه 🎬</button>  
+   <button class="btn secondary" onclick="showPage('food')">برگشت</button>  
+  </div>  
+  <div class="confirm-note">اول فیلم رو انتخاب کن، واکنشم رو ببین، بعد تأیید کن! 🎀</div>  
+ </div>  
+</section>  <section class="page" id="packing">  
+ <div class="card">  
+  <div class="progress"><span style="width:75%"></span></div>  
+  <div class="ribbon emoji">🧳</div>  
+  <h2>چی با خودمون بیاریم؟</h2>  
+  <p class="subtitle">فقط یکی رو انتخاب کن! 🎀</p>  
+  <div class="choices">  
+   <button class="choice" onclick="togglePacking(this,'پیژامه بابا 👖','pajamas')"><span class="emoji">👖</span>پیژامه بابا</button>  
+   <button class="choice" onclick="togglePacking(this,'الکل جات و مشروب🍷','drink')"><span class="emoji">🍷</span>الکل جات و مشروب</button>  
+   <button class="choice" onclick="togglePacking(this,'گوشی 📱','phone')"><span class="emoji">📱</span>گوشی</button>  
+   <button class="choice" onclick="togglePacking(this,'خرت و پرت 🍨','misc')"><span class="emoji">🍨</span>خرت و پرت</button>  
+  </div>  
+  <div class="feedback" id="packingFeedback"></div>  
+  <div class="button-row">  
+   <button class="btn primary" onclick="confirmPacking()">تأیید وسایل و ادامه 🎀</button>  
+   <button class="btn secondary" onclick="showPage('movie')">برگشت</button>  
+  </div>  
+  <div class="confirm-note">فقط یک وسیله می‌تونی همراهت بیاری؛ انتخابت رو مشخص کن! 🎀</div>  
+ </div>  
+</section>  <section class="page" id="final">  
+ <div class="card">  
+  <div class="ribbon emoji">🩷🎀🩷</div>  
+  <h1>قرارمون تکمیله!</h1>  
+  <p>غذا انتخاب شد، فیلم انتخاب شد، وسایلمونم جمع شد!</p>  
+  <p>حالا فقط مونده خوش بگذرونیمممم! 🌷</p>  
+   <p>راستی قرار با یلدا یکم برات خرج داره گلم😊</p>  
+  <div class="button-row">  
+   <button class="btn primary" onclick="renderCart();showPage('cart')">دیدن سبد خرید 🛒</button>  
+  </div>  
+ </div>  
+</section>  <section class="page" id="cart">  
+ <div class="card">  
+  <div class="ribbon emoji">🛍️</div>  
+  <h1>سبد خرید قرارمون!</h1>  
+  <p class="subtitle">همه‌چی آماده‌ست؛ فقط یه مرحله مونده! 💗</p>  
+  <div id="cartItems"></div>  
+  <div class="cart-total"><p>مبلغ نهایی قرار مجازی:</p><strong>۵۶۰ میلیون تومان </strong></div>  
+  <div class="button-row">  
+   <button class="btn primary" onclick="showPage('guest')">پرداخت ۵۶۰ میلیون 😂</button>  
+   <button class="btn secondary" onclick="showPage('final')">برگشت</button>  
+  </div>  
+ </div>  
+</section>  <section class="page" id="guest">  
+ <div class="card">  
+  <div class="ribbon emoji">💌</div>  
+  <h1>یه چیز کوچولو مونده!</h1>  
+  <p>اسمت و پیامت رو بفرست تا شماره کارتم رو بفرستم 💗</p>  
+  <form id="guestForm">  
+   <label class="form-label" for="guestName">اسمت چیه؟ 🎀</label>  
+   <input class="field" id="guestName" maxlength="40" required placeholder="اسم کوچولوت رو بنویس...">  
+   <label class="form-label" for="guestMessage">پیغامی برای یلدا؟ 💗</label>  
+   <textarea class="field" id="guestMessage" maxlength="500" placeholder="هرچی دوست داری برام بنویس..."></textarea>  
+   <div id="guestStatus" class="feedback" role="status" aria-live="polite"></div>  
+   <div class="button-row"><button class="btn primary" id="guestSubmit" type="submit">ارسال پیام 💌</button></div>  
+  </form>  
+ </div>  
+</section>  <section class="page" id="thanks">  
+ <div class="card">  
+  <div class="ribbon emoji">🌷💗🌷</div>  
+  <h1>پیامت به یلدا رسید! 🎀</h1>  
+  <p>پیام و انتخاب‌هات ذخیره شد! 🥹💗</p>  
+  <p>ممنون که توی این قرار مجازی شرکت کردی!</p>  
+   <p>امیدوارم این تجربه برات جالب بوده باشه:)</p>  
+  <button class="btn primary" onclick="showPage('invite')">شروع دوباره 🎀</button>  
+ </div>  
+</section>  <section class="page" id="adminLogin">  
+ <div class="card admin-shell">  
+  <div class="ribbon emoji">🔐</div>  
+  <h1>پنل خصوصی یلدا</h1>  
+  <p class="subtitle">ورود مخصوص مدیر سایت 🎀</p>  
+  <form id="adminLoginForm">  
+   <label class="form-label" for="adminEmail">ایمیل</label>  
+   <input class="field" type="email" id="adminEmail" required placeholder="ایمیل حساب مدیر">  
+   <label class="form-label" for="adminPassword">رمز ورود</label>  
+   <input class="field" type="password" id="adminPassword" required placeholder="رمز پنل">  
+   <button class="btn primary" type="submit">ورود به پنل 🔑</button>  
+   <div class="feedback" id="loginStatus"></div>  
+  </form>  
+  <button class="btn secondary" onclick="showPage('invite')">بازگشت به سایت</button>  
+ </div>  
+</section>  <section class="page" id="adminDenied">  
+ <div class="card">  
+  <div class="ribbon emoji">🔒</div>  
+  <h1>پنل خصوصی یلدا</h1>  
+  <div class="denied">  
+   <h2>در دسترس فقط برای سازنده 🎀</h2>  
+   <p>اجازه ورود به این بخش را ندارید.</p>  
+  </div>  
+  <div class="button-row">  
+   <button class="btn primary" onclick="showPage('invite');history.replaceState(null,'',location.pathname+location.search)">بازگشت به سایت</button>  
+  </div>  
+ </div>  
+</section>  <section class="page" id="adminPanel">  
+ <div class="card admin-shell">  
+  <div class="admin-top">  
+   <div><h2>دفتر پیام‌های یلدا 💌</h2><div class="small-note">پیام‌های دریافتی از همه بازدیدکنندگان</div></div>  
+   <button class="btn secondary" onclick="logoutAdmin()">خروج 🔒</button>  
+  </div>  
+  <div class="cart-total"><strong id="messageCount">۰</strong><div>پیام ذخیره‌شده</div></div>  
+  <div class="button-row"><button class="btn lavender" onclick="loadMessages()">به‌روزرسانی 🔄</button></div>  
+  <div id="messagesList"></div>  
+ </div>  
+</section>  </main>  
+<footer>Made with love & lots of bows 🎀<br>Our Little Date<br><a href="#admin" style="color:#c58aa5;text-decoration:none">♡</a></footer>  <script>  
+// Supabase  
+const SUPABASE_URL = "https://gbamuejkeozrssexicfj.supabase.co";  
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_5_AQuRH6j9YYTCEhs6cBcg_pXj-FIv7";  
   
-   <div id="telegramStatus" class="feedback" role="status" aria-live="polite"></div>
-   <div class="button-row">
-    <button class="btn primary" id="telegramSubmit" type="submit">ارسال به ربات تلگرام 💌</button>
-   </div>
-  </form>
- </div>
-</section>
-
-<!-- پایان ارسال تلگرام -->
-<section class="page" id="thanks">
- <div class="card">
-  <div class="ribbon emoji">🌷💗🌷</div>
-  <h1>پیامت به یلدا رسید! 🎀</h1>
-  <p>ربات تلگرام پیام و انتخاب‌هات رو دریافت کرد! 🥹💗</p>
-  <p>ممنون که توی این قرار مجازی شرکت کردی!</p>
-  <button class="btn primary" onclick="showPage('invite')">شروع دوباره 🎀</button>
- </div>
-</section>
-
-<!-- پنل ورود -->
-<section class="page" id="adminLogin">
- <div class="card admin-shell">
-  <div class="ribbon emoji">🔐</div>
-  <h1>پنل خصوصی یلدا</h1>
-  <p class="subtitle">این قسمت نمایشی و مخصوص همین مرورگر است 🎀</p>
-  <form id="adminLoginForm">
-   <label class="form-label" for="adminPassword">رمز ورود</label>
-   <input class="field" type="password" id="adminPassword" required placeholder="رمز پنل">
-   <button class="btn primary" type="submit">ورود به پنل 🔑</button>
-   <div class="status" id="loginStatus"></div>
-  </form>
-  <button class="btn secondary" onclick="showPage('invite')">بازگشت به سایت</button>
- </div>
-</section>
-
-<!-- پنل -->
-<section class="page" id="adminPanel">
- <div class="card admin-shell">
-  <div class="admin-top">
-   <div>
-    <h2>دفتر پیام‌های یلدا 💌</h2>
-    <div class="small-note">پیام‌های ذخیره‌شده در همین مرورگر</div>
-   </div>
-   <button class="btn secondary" onclick="logoutAdmin()">خروج 🔒</button>
-  </div>
-  <div class="cart-total">
-   <strong id="messageCount">۰</strong>
-   <div>پیام ذخیره‌شده</div>
-  </div>
-  <div class="button-row">
-   <button class="btn lavender" onclick="loadMessages()">به‌روزرسانی 🔄</button>
-  </div>
-  <div id="messagesList"></div>
- </div>
-</section>
-
-</main>
-
-<footer>
- Made with love & lots of bows 🎀
- <br>Our Little Date
- <br><a href="#admin" style="color:#c58aa5;text-decoration:none">♡</a>
-</footer>
-
-<script>
-// بعد از ساخت Cloudflare Worker، آدرس آن را اینجا قرار بده.
-const TELEGRAM_BOT_TOKEN = "PASTE_YOUR_BOT_TOKEN_HERE";
-const TELEGRAM_CHAT_ID = "8277937952";
-const ADMIN_PASSWORD = "Yalda1234";
-
-let selectedFood = "";
-let selectedMovie = "";
-let selectedPacking = [];
-
-function showPage(id){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function noThanks(){
-  const btn=document.getElementById("noBtn");
-  const feedback=document.getElementById("noFeedback");
-  feedback.textContent="نه نداریمااا! یه بار دیگه فکر کن! 😂💗";
-  feedback.classList.add("show");
-  const scale=Number(btn.dataset.scale||1);
-  const next=Math.max(.35,scale-.15);
-  btn.dataset.scale=next;
-  btn.style.transform=`scale(${next})`;
-}
-
-// غذا
-const foodReactions={
-  noodles:"سلیقه‌هامون یکیهههه! 🥹💗",
-  pizza:"مشتی حال داری پاشو خودن درست کن😂🍕",
-  burger:"جدی جدی برگر؟! 😭🍔",
-  sushi:"بابات کره‌ای بوده یا ننت؟ 😂🍣",
-  ghormeh:"قرار بود خوش بگذرونیم، نه غذای خونه بخوریم! 😭🥘",
-  istanbuli:"این غذا رو روش غیرت دارم، حاضر نیستم باهات نصف کنم! 😤🍅"
-};
-
-function chooseFood(button,label,key){
-  document.querySelectorAll("#food .choice").forEach(b=>b.classList.remove("selected"));
-  button.classList.add("selected");
-
-  selectedFood=label;
-  const feedback=document.getElementById("foodFeedback");
-  feedback.textContent=foodReactions[key];
-  feedback.classList.add("show");
-
-  document.getElementById("foodConfirm").disabled=(key!=="noodles");
-}
-
-function confirmFood(){
-  if(!selectedFood || !selectedFood.startsWith("نودل")) return;
-  showPage("movie");
-}
-
-// فیلم
-const movieReactions={
-  harry:"دوسش دارم ولی آخه الان؟! 🪄😂",
-  love:"سیهدیررررر این چیه؟! 😭",
-  alchemy:"برای هزار بارم که شده میبینمممم! 🥹✨",
-  sponge:"باید غذا برگر انتخاب می‌کردی الاغ 😂🍔"
-};
-
-function chooseMovie(button,label,key){
-  document.querySelectorAll("#movie .choice").forEach(b=>b.classList.remove("selected"));
-  button.classList.add("selected");
-
-  selectedMovie=label;
-  const feedback=document.getElementById("movieFeedback");
-  feedback.textContent=movieReactions[key];
-  feedback.classList.add("show");
-
-  document.getElementById("movieConfirm").disabled=false;
-}
-
-function confirmMovie(){
-  if(!selectedMovie) return;
-  showPage("packing");
-}
-
-// وسایل و واکنش‌ها
-const packingReactions={
-  pajamas:"ترجیح میدم با شورت بیام تا بیژامه بابام 😭",
-  drink:"من اگه گذاشتم تو بیای حرومییی🫵😡",
-  phone:"سیسی نمیزارم بیاری گوه خوردی تو بری تو گوشی 😂",
-  misc:"امشب بریز و بپاشههههه بیار بزنیم به بدننن 🎉"
-};
-
-function togglePacking(button,label,key){
-  const alreadySelected = selectedPacking.some(item => item.key === key);
-
-  // هر بار همه گزینه‌ها از حالت انتخاب خارج می‌شوند
-  document.querySelectorAll("#packing .choice").forEach(choice => {
-    choice.classList.remove("selected");
-  });
-
-  // اگر همان گزینه دوباره زده شود، انتخاب پاک می‌شود؛ در غیر این صورت فقط همان انتخاب می‌شود
-  if(alreadySelected){
-    selectedPacking = [];
-  }else{
-    selectedPacking = [{label,key}];
-    button.classList.add("selected");
-  }
-
-  const feedback=document.getElementById("packingFeedback");
-  if(selectedPacking.length){
-    feedback.textContent = packingReactions[key];
-  }else{
-    feedback.textContent="هنوز چیزی انتخاب نکردی!";
-  }
-  feedback.classList.add("show");
-}
-
-function confirmPacking(){
-  if(selectedPacking.length===0){
-    const feedback=document.getElementById("packingFeedback");
-    feedback.textContent="حداقل یه وسیله انتخاب کن دیگه! 😂🎀";
-    feedback.classList.add("show");
-    return;
-  }
-  showPage("final");
-}
-
-// سبد خرید
-function renderCart(){
-  const container=document.getElementById("cartItems");
-  container.replaceChildren();
-
-  const items=[
-    ["🍜","غذا",selectedFood],
-    ["🎬","فیلم",selectedMovie],
-    ["🧳","وسایل",selectedPacking.map(item=>item.label).join("، ")]
-  ];
-
-  items.forEach(item=>{
-    const line=document.createElement("div");
-    line.className="cart-line";
-
-    const title=document.createElement("strong");
-    title.textContent=item[0]+" "+item[1];
-
-    const value=document.createElement("span");
-    value.textContent=item[2]||"انتخاب نشده";
-
-    line.append(title,value);
-    container.append(line);
-  });
-}
-
-// ارسال مستقیم پیام از طریق ربات تلگرام (نسخه آزمایشی محلی)
-document.getElementById("guestForm").addEventListener("submit", async function(event){
-  event.preventDefault();
-
-  const name = document.getElementById("guestName").value.trim();
-  const message = document.getElementById("guestMessage").value.trim();
-  const status = document.getElementById("telegramStatus");
-  const submitButton = document.getElementById("telegramSubmit");
-
-  if (!name) {
-    status.textContent = "اول اسمت رو بنویس! 💗";
-    status.classList.add("show");
-    return;
-  }
-
-  if (TELEGRAM_BOT_TOKEN === "9033398627:AAHt7-g9vFI1MY7JuyNpn3JjsYxj6_z94JcE") {
-    status.textContent = "توکن ربات هنوز در کد قرار نگرفته! 🎀";
-    status.classList.add("show");
-    return;
-  }
-
-  const payload = {
-    name,
-    message,
-    food: selectedFood,
-    movie: selectedMovie,
-    items: selectedPacking.map(item => item.label)
-  };
-
-  submitButton.disabled = true;
-  submitButton.textContent = "در حال ارسال... 💌";
-  status.textContent = "دارم پیامت رو به ربات می‌فرستم... ✨";
-  status.classList.add("show");
-
-  try {
-    const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
-        text:
-          "🎀 قرار جدید در Our Little Date!\n\n" +
-          "👤 اسم: " + payload.name + "\n" +
-          "🍜 غذا: " + payload.food + "\n" +
-          "🎬 فیلم: " + payload.movie + "\n" +
-          "🧳 وسایل: " + (payload.items.join("، ") || "چیزی انتخاب نشده") + "\n\n" +
-          "💌 پیام:\n" + (payload.message || "پیامی ننوشته است.")
-      })
-    });
-
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok || !result.ok) {
-      throw new Error("ارسال انجام نشد");
-    }
-
-    this.reset();
-    showPage("thanks");
-  } catch (error) {
-    status.textContent = "ارسال انجام نشد! اتصال اینترنت یا تنظیمات ربات رو بررسی کن و دوباره امتحان کن. 💗";
-    status.classList.add("show");
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "ارسال به ربات تلگرام 💌";
-  }
-});
-
-// پنل محلی
-document.getElementById("adminLoginForm").addEventListener("submit",function(event){
-  event.preventDefault();
-
-  const password=document.getElementById("adminPassword").value;
-  const status=document.getElementById("loginStatus");
-
-  if(password==="Yalda1234"){
-    sessionStorage.setItem("ourDateAdmin","yes");
-    document.getElementById("adminPassword").value="";
-    showPage("adminPanel");
-    loadMessages();
-  }else{
-    status.textContent="رمز اشتباهه! دوباره امتحان کن 💗";
-  }
-});
-
-function loadMessages(){
-  const list=document.getElementById("messagesList");
-  const count=document.getElementById("messageCount");
-  list.replaceChildren();
-
-  const messages=JSON.parse(localStorage.getItem("ourDateMessages")||"[]");
-  count.textContent=messages.length.toLocaleString("fa-IR");
-
-  if(!messages.length){
-    const empty=document.createElement("p");
-    empty.textContent="هنوز پیامی در این مرورگر ذخیره نشده! 🌷";
-    list.append(empty);
-    return;
-  }
-
-  messages.forEach((item,index)=>{
-    const card=document.createElement("article");
-    card.className="message-card";
-
-    const name=document.createElement("strong");
-    name.textContent="💗 "+item.name;
-
-    const date=document.createElement("div");
-    date.className="message-meta";
-    date.textContent=item.date;
-
-    const message=document.createElement("p");
-    message.textContent=item.message;
-
-    const del=document.createElement("button");
-    del.className="delete-btn";
-    del.textContent="حذف پیام 🗑️";
-    del.addEventListener("click",()=>deleteMessage(index));
-
-    card.append(name,date,message,del);
-    list.append(card);
-  });
-}
-
-function deleteMessage(index){
-  if(!confirm("مطمئنی می‌خوای این پیام حذف بشه؟")) return;
-
-  const messages=JSON.parse(localStorage.getItem("ourDateMessages")||"[]");
-  messages.splice(index,1);
-  localStorage.setItem("ourDateMessages",JSON.stringify(messages));
-  loadMessages();
-}
-
-function logoutAdmin(){
-  sessionStorage.removeItem("ourDateAdmin");
-  showPage("invite");
-}
-
-function checkAdminRoute(){
-  if(location.hash==="#admin"){
-    showPage("adminLogin");
-  }
-}
-window.addEventListener("hashchange",checkAdminRoute);
-checkAdminRoute();
-</script>
-</body>
+const supabaseClient = window.supabase.createClient(  
+  SUPABASE_URL,  
+  SUPABASE_PUBLISHABLE_KEY  
+);  
+  
+// شناسه حساب مدیر مجاز  
+const ADMIN_UID = "8cba3ddd-687a-4455-8292-4f4122382738";  
+  
+let selectedFood="";  
+let selectedMovie="";  
+let selectedPacking=[];  
+  
+function showPage(id){  
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));  
+  document.getElementById(id).classList.add("active");  
+  window.scrollTo({top:0,behavior:"smooth"});  
+}  
+  
+function noThanks(){  
+  const btn=document.getElementById("noBtn");  
+  const feedback=document.getElementById("noFeedback");  
+  feedback.textContent="نه نداریمااا! یه بار دیگه فکر کن! 😂💗";  
+  feedback.classList.add("show");  
+  const scale=Number(btn.dataset.scale||1);  
+  const next=Math.max(.35,scale-.15);  
+  btn.dataset.scale=next;  
+  btn.style.transform=`scale(${next})`;  
+}  
+  
+const foodReactions={  
+  noodles:"سلیقه‌هامون یکیهههه! 🥹💗",  
+  pizza:"مشتی حال داری پاشو خودن درست کن😂🍕",  
+  burger:"جدی جدی برگر؟! 😭🍔",  
+  sushi:"بابات کره‌ای بوده یا عمت؟ 😂🍣",  
+  ghormeh:"قرار بود خوش بگذرونیم، نه غذای خونه بخوریم! 😭🥘",  
+  istanbuli:"این غذا رو روش غیرت دارم، حاضر نیستم باهات نصف کنم! 😤🍅"  
+};  
+  
+function chooseFood(button,label,key){  
+  document.querySelectorAll("#food .choice").forEach(b=>b.classList.remove("selected"));  
+  button.classList.add("selected");  
+  selectedFood=label;  
+  const feedback=document.getElementById("foodFeedback");  
+  feedback.textContent=foodReactions[key] || "";  
+  feedback.classList.add("show");  
+  document.getElementById("foodConfirm").disabled=false;  
+}  
+function confirmFood(){  
+  if(!selectedFood)return;  
+  showPage("movie");  
+}  
+  
+const movieReactions={  
+  harry:"دوسش دارم ولی آخه الان؟! 🪄😂",  
+  love:"سیهدیررررر این چیه؟! 😭",  
+  alchemy:"برای هزار بارم که شده میبینمممم! 🥹✨",  
+  sponge:"باید غذا برگر انتخاب می‌کردی الاغ 😂🍔"  
+};  
+function chooseMovie(button,label,key){  
+  document.querySelectorAll("#movie .choice").forEach(b=>b.classList.remove("selected"));  
+  button.classList.add("selected");  
+  selectedMovie=label;  
+  const feedback=document.getElementById("movieFeedback");  
+  feedback.textContent=movieReactions[key] || "";  
+  feedback.classList.add("show");  
+  document.getElementById("movieConfirm").disabled=false;  
+}  
+function confirmMovie(){  
+  if(!selectedMovie)return;  
+  showPage("packing");  
+}  
+  
+const packingReactions={  
+  pajamas:"ترجیح میدم با شورت بیام تا بیژامه بابام 😭",  
+  drink:"صب کن مامانتو ببینم اشغال😡🫵",  
+  phone:"پفیوز قرار بدون گوشیه🤦🏻‍♀️",  
+  misc:"امشب بریز و بپاشههههه بیار بزنیم به بدننن 🎉"  
+};  
+function togglePacking(button,label,key){  
+  const alreadySelected=selectedPacking.some(item=>item.key===key);  
+  document.querySelectorAll("#packing .choice").forEach(choice=>choice.classList.remove("selected"));  
+  if(alreadySelected){  
+    selectedPacking=[];  
+  }else{  
+    selectedPacking=[{label,key}];  
+    button.classList.add("selected");  
+  }  
+  const feedback=document.getElementById("packingFeedback");  
+  feedback.textContent=selectedPacking.length?packingReactions[key]:"هنوز چیزی انتخاب نکردی!";  
+  feedback.classList.add("show");  
+}  
+function confirmPacking(){  
+  if(selectedPacking.length===0){  
+    const feedback=document.getElementById("packingFeedback");  
+    feedback.textContent="حداقل یه وسیله انتخاب کن دیگه! 😂🎀";  
+    feedback.classList.add("show");  
+    return;  
+  }  
+  showPage("final");  
+}  
+  
+function renderCart(){  
+  const container=document.getElementById("cartItems");  
+  container.replaceChildren();  
+  const items=[  
+    ["🍜","غذا",selectedFood],  
+    ["🎬","فیلم",selectedMovie],  
+    ["🧳","وسایل",selectedPacking.map(item=>item.label).join("، ")]  
+  ];  
+  items.forEach(item=>{  
+    const line=document.createElement("div");  
+    line.className="cart-line";  
+    const title=document.createElement("strong");  
+    title.textContent=item[0]+" "+item[1];  
+    const value=document.createElement("span");  
+    value.textContent=item[2]||"انتخاب نشده";  
+    line.append(title,value);  
+    container.append(line);  
+  });  
+}  
+  
+// ارسال پیام مهمان  
+document.getElementById("guestForm").addEventListener("submit",async function(event){  
+  event.preventDefault();  
+  const name=document.getElementById("guestName").value.trim();  
+  const message=document.getElementById("guestMessage").value.trim();  
+  const status=document.getElementById("guestStatus");  
+  const submit=document.getElementById("guestSubmit");  
+  
+  if(!name){  
+    status.textContent="اول اسمت رو بنویس! 💗";  
+    status.classList.add("show");  
+    return;  
+  }  
+  
+  submit.disabled=true;  
+  submit.textContent="در حال ارسال... 💌";  
+  status.textContent=" دارم پیامت رو ذخیره می‌کنم بچه خوشگل... ✨";  
+  status.classList.add("show");  
+  
+  try{  
+    const {error}=await supabaseClient  
+      .from("guest_messages")  
+      .insert([{  
+        name,  
+        message,  
+        food:selectedFood,  
+        movie:selectedMovie,  
+        items:selectedPacking.map(item=>item.label)  
+      }]);  
+  
+    if(error)throw error;  
+  
+    this.reset();  
+    showPage("thanks");  
+  }catch(error){  
+    console.error("SUPABASE ERROR:",error);  
+    status.textContent="ارسال پیام انجام نشد: "+(error.message||"خطای ناشناخته");  
+  }finally{  
+    submit.disabled=false;  
+    submit.textContent="ارسال پیام 💌";  
+  }  
+});  
+  
+// بررسی شناسه مدیر  
+function isAdmin(user){  
+  return !!user && user.id === ADMIN_UID;  
+}  
+  
+// ورود مدیر  
+document.getElementById("adminLoginForm").addEventListener("submit",async function(event){  
+  event.preventDefault();  
+  
+  const email=document.getElementById("adminEmail").value.trim();  
+  const password=document.getElementById("adminPassword").value;  
+  const status=document.getElementById("loginStatus");  
+  
+  status.textContent="در حال بررسی اطلاعات ورود...";  
+  status.classList.add("show");  
+  
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});  
+  
+  if(error || !isAdmin(data?.user)){  
+    await supabaseClient.auth.signOut();  
+    status.textContent="🔒 در دسترس فقط برای سازنده سایت!";  
+    return;  
+  }  
+  
+  document.getElementById("adminPassword").value="";  
+  showPage("adminPanel");  
+  await loadMessages();  
+});  
+  
+// بارگذاری پیام‌ها  
+async function loadMessages(){  
+  const list=document.getElementById("messagesList");  
+  const count=document.getElementById("messageCount");  
+  list.replaceChildren();  
+  
+  const {data:sessionData}=await supabaseClient.auth.getSession();  
+  
+  if(!isAdmin(sessionData?.session?.user)){  
+    showPage("adminDenied");  
+    return;  
+  }  
+  
+  const {data,error}=await supabaseClient  
+    .from("guest_messages")  
+    .select("id,name,message,created_at,food,movie,items")  
+    .order("created_at",{ascending:false});  
+  
+  if(error){  
+    const err=document.createElement("p");  
+    err.textContent="دریافت پیام‌ها ناموفق بود. دسترسی مدیر و ستون‌های جدول را بررسی کن.";  
+    list.append(err);  
+    console.error(error);  
+    return;  
+  }  
+  
+  count.textContent=data.length.toLocaleString("fa-IR");  
+  
+  if(!data.length){  
+    const empty=document.createElement("p");  
+    empty.textContent="هنوز پیامی دریافت نشده! 🌷";  
+    list.append(empty);  
+    return;  
+  }  
+  
+  data.forEach(item=>{  
+    const card=document.createElement("article");  
+    card.className="message-card";  
+  
+    const name=document.createElement("strong");  
+    name.textContent="💗 "+item.name;  
+  
+    const date=document.createElement("div");  
+    date.className="message-meta";  
+    date.textContent=new Date(item.created_at).toLocaleString("fa-IR");  
+  
+    const choices=document.createElement("div");  
+    choices.className="small-note";  
+    choices.textContent="🍽️ "+(item.food||"—")+" | 🎬 "+(item.movie||"—")+" | 🧳 "+((item.items||[]).join("، ")||"—");  
+  
+    const message=document.createElement("p");  
+    message.textContent=item.message||"پیامی ننوشته است.";  
+  
+    const del=document.createElement("button");  
+    del.className="delete-btn";  
+    del.textContent="حذف پیام 🗑️";  
+    del.addEventListener("click",()=>deleteMessage(item.id));  
+  
+    card.append(name,date,choices,message,del);  
+    list.append(card);  
+  });  
+}  
+  
+async function deleteMessage(id){  
+  const {data:sessionData}=await supabaseClient.auth.getSession();  
+  
+  if(!isAdmin(sessionData?.session?.user)){  
+    showPage("adminDenied");  
+    return;  
+  }  
+  
+  if(!confirm("مطمئنی می‌خوای این پیام حذف بشه؟"))return;  
+  
+  const {error}=await supabaseClient  
+    .from("guest_messages")  
+    .delete()  
+    .eq("id",id);  
+  
+  if(error){  
+    alert("حذف پیام انجام نشد.");  
+    console.error(error);  
+    return;  
+  }  
+  await loadMessages();  
+}  
+  
+async function logoutAdmin(){  
+  await supabaseClient.auth.signOut();  
+  showPage("invite");  
+  history.replaceState(null,"",location.pathname+location.search);  
+}  
+  
+// ورود به پنل با لینک #admin  
+async function checkAdminRoute(){  
+  if(location.hash==="#admin"){  
+    const {data,error}=await supabaseClient.auth.getSession();  
+  
+    if(error){  
+      showPage("adminDenied");  
+      return;  
+    }  
+  
+    if(isAdmin(data?.session?.user)){  
+      showPage("adminPanel");  
+      await loadMessages();  
+    }else{  
+      showPage("adminLogin");  
+    }  
+  }  
+}  
+  
+window.addEventListener("hashchange",checkAdminRoute);  
+checkAdminRoute();  
+</script>  </body>  
 </html>
